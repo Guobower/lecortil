@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+        <record model="ir.ui.view" id="view_form_cortil_tour">
+            <field name="name">cortil.tour.form</field>
+            <field name="model">cortil.tour</field>
+            <field name="arch" type="xml">
+                <form string="Tournées">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="action_cortil_tour">
+            <field name="name">Tournées</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cortil.tour</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_cortil_tour" name="Tournées" parent="base.menu_base_config" action="action_cortil_tour"/>
+    </data>
+</openerp>
