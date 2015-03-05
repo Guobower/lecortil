@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+        <record model="ir.ui.view" id="view_sale_order_cortil">
+            <field name="name">sale.order.cortil</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree[@string='Sales Order Lines']/field[@name='name']" position="before">
+                    <field name="eater" domain="[('partner','=',parent.partner_id)]" on_change="onchange_eater(eater)"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
