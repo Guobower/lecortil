@@ -1,30 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <openerp>
 	<data>
-        <record model="ir.ui.view" id="view_sale_order_line_edit">
-            <field name="name">sale.order.line.edit</field>
-            <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale.view_order_form_editable_list"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='order_line']/tree" position="attributes">
-                    <attribute name="editable">bottom</attribute>
-                </xpath>
-            </field>
-        </record>
         <record model="ir.ui.view" id="view_sale_order_cortil_product_supplements">
             <field name="name">sale.order.cortil.product.supplements</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//tree[@string='Sales Order Lines']/field[@name='product_uom']" position="attributes">
-                    <attribute name='invisible'>1</attribute> 
-                </xpath>
-                <xpath expr="//tree[@string='Sales Order Lines']/field[@name='tax_id']" position="attributes">
-                    <attribute name='invisible'>1</attribute> 
-                </xpath>
-                <xpath expr="//tree[@string='Sales Order Lines']/field[@name='discount']" position="attributes">
-                    <attribute name='invisible'>1</attribute> 
-                </xpath>
                 <xpath expr="//tree[@string='Sales Order Lines']/field[@name='product_id']" position="after">
                     <field name="supplement_products_ids" widget="many2many_tags" options="{'no_create': True}" domain="[('category_name','ilike','%suppl%')]"/>
                 </xpath>
