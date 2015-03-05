@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<report 
+			id="report_deliveries_labels"
+			string="Delivery labels"
+			model="sale.order" 
+			report_type="qweb-pdf"
+			file="stock.report_deliverieslabels" 
+			name="stock.report_deliverieslabels"
+		/>
+
+		<template id="stock.report_deliverieslabels_document">
+			<!-- paperformat_id="stock_deliveries_labels_paperformat" -->			
+			<!-- Multicompany -->
+			<t t-if="o and 'company_id' in o">
+				<t t-set="company" t-value="o.company_id"/>
+			</t>
+			<t t-if="not o or not 'company_id' in o">
+				<t t-set="company" t-value="res_company"/>
+			</t>
+
+			<div t-foreach="o.order_line" t-as="line">
+				<div class="page" t-foreach="int(round(line.product_uos_qty))" t-as="unit">
+					<div class="oe_structure"/>
+					<div class="row">
+						<table style="width: 100%; text-align: center;">
+
+							<!-- DELIVERY TOUR COLOR ROW -->
+							<tr>
+								<td>BLACK</td>
+								<td>BLUE</td>
+								<td>GREEN</td>
+							</tr>
+
+							<!-- CUSTOMER NAME -->
+							<tr>
+								<td colspan="3" style="background-color: black; color: white;">
+									<b><span t-field="o.partner_invoice_id" /></b>
+								</td>
+							</tr>
+
+							<!-- EATER NAME -->
+							<tr>
+								<td colspan="3">
+									<b>EATER NAME</b>
+								</td>
+							</tr>
+
+							<!-- PRODUCT NAME & SIZE -->
+							<tr>
+								<td colspan="2">
+									<b><span t-field="line.product_id.name"/></b>
+								</td>
+								<td style="background-color: black; color: white;">
+									<b>SIZE</b>
+								</td>
+							</tr>
+
+							<!-- PRODUCT DESCRIPTION -->
+							<tr>
+								<td colspan="3">
+									<i><span t-field="line.product_id.description"/></i>
+								</td>
+							</tr>
+
+							<!-- ++ -->
+							<tr>
+								<td>
+									+
+								</td>
+								<td colspan="2">
+									added
+								</td>
+							</tr>
+
+							<!-- WITHOUT -->
+							<tr>
+								<td>
+									SANS
+								</td>
+								<td colspan="2">
+									removed
+								</td>
+							</tr>
+
+
+						</table>
+					</div>
+				</div>
+			    <div class="oe_structure"/>
+			</div>
+		    <!--</t>-->
+		</template>
+
+		<template id="stock.report_deliverieslabels">
+		    <t t-call="report.html_container">
+		        <t t-foreach="doc_ids" t-as="doc_id">
+		            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'stock.report_deliverieslabels_document')"/>
+		        </t>
+		    </t>
+		</template>
+	</data>
+</openerp>
+
