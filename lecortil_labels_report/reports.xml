@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
 	<data>
+		<record id="sale_order_report" model="ir.ui.view">
+			<field name="name">sale_order_report</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="(//button[@string='Print'])[1]" position="after">
+					<button name="print_labels" type="object" string="Print labels"/>
+				</xpath>
+			</field>
+		</record>
 		<report 
 			id="report_deliveries_labels"
 			string="Delivery labels"
