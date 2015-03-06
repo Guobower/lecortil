@@ -31,5 +31,5 @@ class sale_order_line_amount_line_product_supplements(osv.osv):
     _inherit = 'sale.order.line'
     
     _columns = { 
-        'price_subtotal': fields.function(_amount_line_product_supplements, string='Subtotal', digits_compute= dp.get_precision('Account')),
+        'price_subtotal': fields.function(_amount_line_product_supplements, string='HTVA', digits_compute= dp.get_precision('Account')),
     }
