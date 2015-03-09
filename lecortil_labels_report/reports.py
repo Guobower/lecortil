@@ -5,7 +5,7 @@ class sale_order_delivery_labels(models.Model):
 
     def print_labels(self, cr, uid, ids, context=None):
         #report name: stock.report_deliverieslabels
-        return self.pool['report'].get_action(cr, uid, ids, 'stock.report_deliverieslabels', context=context)
+        return self.pool['report'].get_action(cr, uid, ids, 'sale.report_deliverieslabels', context=context)
     
 
 

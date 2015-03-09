@@ -1,7 +1,7 @@
 {
     'name': "Delivery labels",
     'version': '1.0',
-    'depends': ['sale', 'report', 'lecortil_tours', 'lecortil_product_eater', 'lecortil_product_supplement'],
+    'depends': ['sale', 'report', 'lecortil_tours', 'lecortil_product_eater', 'lecortil_product_supplement', 'lecortil_sale_order_line_description'],
     'author': "Valentin THIRION, AbAKUS it-solutions SARL",
     'website': "http://www.abakusitsolutions.eu",
     'category': 'Stock',
