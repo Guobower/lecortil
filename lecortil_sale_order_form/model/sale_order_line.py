@@ -22,7 +22,7 @@ class sale_order_products_summary(models.Model):
                 else:
                     category_dic[category_name] = 1
             for cat_name in category_dic.keys():
-                summary += '%s: %s</br>'%(cat_name, str(category_dic.get(cat_name, 0)))
+                summary += '%s: %s\n'%(cat_name, str(category_dic.get(cat_name, 0)))
             if self.products_summary != summary:
                 self.products_summary = summary
         else:
