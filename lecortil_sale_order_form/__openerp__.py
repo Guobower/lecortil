@@ -1,5 +1,5 @@
 {
-    "name" : "Add a product summary in sale order and form changements",
+    "name" : "Sale order form improvements",
     "version" : "1.0",
     "author" : "Bernard DELHEZ, AbAKUS it-solutions SARL",
     "category": 'Product',
@@ -15,6 +15,8 @@ It leaves for columns:
 	- Subtotal
 And adds:
 	- The sum of products by category
+
+It also removes all unecessary fields in the form head.
 
 This module has been developed by Bernard Delhez, intern @ AbAKUS it-solutions, under the control of Valentin Thirion.
     """,

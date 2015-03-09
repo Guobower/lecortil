@@ -28,6 +28,22 @@
                 <xpath expr="//field[@name='note']" position="after">
                     <field name="products_summary"/>
                 </xpath>
+                <!-- remove unecessary items in SO form -->
+                <xpath expr="//field[@name='partner_invoice_id']" position="attributes">
+                    <attribute name='invisible'>1</attribute> 
+                </xpath>
+                <xpath expr="//field[@name='partner_shipping_id']" position="attributes">
+                    <attribute name='invisible'>1</attribute> 
+                </xpath>
+                <xpath expr="//field[@name='project_id']" position="attributes">
+                    <attribute name='invisible'>1</attribute> 
+                </xpath>
+                <xpath expr="//field[@name='client_order_ref']" position="attributes">
+                    <attribute name='invisible'>1</attribute> 
+                </xpath>
+                <xpath expr="//field[@name='pricelist_id']" position="attributes">
+                    <attribute name='invisible'>1</attribute> 
+                </xpath>
             </field>
         </record>
     </data>
