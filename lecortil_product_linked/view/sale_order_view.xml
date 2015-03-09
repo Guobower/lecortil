@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+        <record model="ir.ui.view" id="view_sale_order_linked_products">
+            <field name="name">sale.order.linked.products</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <button name="print_quotation" position="after">
+                    <button name="add_linked_products" string="Ajouter produits liées" type="object"/>
+                </button>                 
+            </field>
+        </record>
+	</data>
+</openerp>
