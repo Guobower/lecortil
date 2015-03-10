@@ -83,7 +83,7 @@
 									<td colspan="2" style="border: 1px black solid; font-size: 1.2em;">
 										<b><span t-field="line.product_id.name"/></b>
 									</td>
-									<td style="background-color: black; color: white; test-transform: uppercase; font-size: 1.2em;">
+									<td style="background-color: black; color: white; text-transform: uppercase; font-size: 1.2em;">
 										<b><span t-field="line.product_id.attribute_value_ids[0].name"/></b>
 									</td>
 								</t>
