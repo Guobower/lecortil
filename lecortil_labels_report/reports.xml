@@ -65,7 +65,7 @@
 
 							<!-- CUSTOMER NAME -->
 							<tr>
-								<td colspan="3" style="background-color: black; color: white; font-size: 1.7em; text-transform: uppercase;">
+								<td colspan="3" style="background-color: black; color: white; font-size: 2em; text-transform: uppercase;">
 									<b><span t-field="o.partner_invoice_id" /></b>
 								</td>
 							</tr>
@@ -80,16 +80,16 @@
 							<!-- PRODUCT NAME & SIZE -->
 							<tr>
 								<t t-if="line.product_id.attribute_value_ids">
-									<td colspan="2" style="border: 1px black solid; font-size: 1.2em;">
+									<td colspan="2" style="border: 1px black solid; font-size: 1.8em;">
 										<b><span t-field="line.product_id.name"/></b>
 									</td>
-									<td style="background-color: black; color: white; text-transform: uppercase; font-size: 1.2em;">
+									<td style="background-color: black; color: white; text-transform: uppercase; font-size: 1.8em;">
 										<b><span t-field="line.product_id.attribute_value_ids[0].name"/></b>
 									</td>
 								</t>
 								
 								<t t-if="not line.product_id.attribute_value_ids">
-									<td colspan="3" style="border: 1px black solid; font-size: 1.2em;">
+									<td colspan="3" style="border: 1px black solid; font-size: 1.8em;">
 										<b><span t-field="line.product_id.name"/></b>
 									</td>
 								</t>
