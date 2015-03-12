@@ -9,6 +9,6 @@ This module has been developed by Bernard Delhez, intern @ AbAKUS it-solutions, 
     """,
     'website': "http://www.abakusitsolutions.eu",
     'depends' : ['sale',],
-    'data': ['view/sale_order_view.xml','view/res_partner.xml',],
+    'data': ['view/sale_order_view.xml','view/res_partner.xml','security/ir.model.access.csv',],
 }
  
