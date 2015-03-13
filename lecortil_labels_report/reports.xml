@@ -143,6 +143,9 @@
 												<t t-if="supp.lst_price &gt; 0">
 													+ <u><span t-field="supp.name"/></u> | 
 												</t>
+											</t>
+											<br />
+											<t t-foreach="line.supplement_products_ids" t-as="supp">
 												<t t-if="supp.lst_price &lt; 0">
 													SANS <u><span t-field="supp.name"/></u> | 
 												</t>
