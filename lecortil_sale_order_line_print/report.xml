@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<report 
+			id="report_deliveries_label"
+			string="Sandwich delivery label"
+			model="sale.order.line" 
+			report_type="qweb-pdf"
+			file="label" 
+			name="sale.report_deliverieslabel"
+		/>
+
+		<template id="sale.report_deliverieslabel_document">
+			<!-- Multicompany -->
+			<t t-if="o and 'company_id' in o">
+				<t t-set="company" t-value="o.company_id"/>
+			</t>
+			<t t-if="not o or not 'company_id' in o">
+				<t t-set="company" t-value="res_company"/>
+			</t>
+
+            <div class="page" t-foreach="int(round(o.product_uos_qty))" t-as="unit">
+                <div class="oe_structure"/>
+                <div class="row">
+                    <table style="width: 100%; text-align: center;">
+
+                        <!-- DELIVERY TOUR COLOR ROW -->
+                        <tr>
+                            <!-- BLUE : BLACK RIGHT AND BLACK LEFT -->
+                            <t t-if="o.order_id.partner_invoice_id.tour.id==3">
+                                <td width="33%" height="30px" style="background-color: black;"></td>
+                                <td width="33%" style="background-color: blue;"></td>
+                                <td width="33%" style="background-color: black;"></td>
+                            </t>
+
+                            <!-- BLACK : BLACK RIGHT AND CENTER -->
+                            <t t-if="o.order_id.partner_invoice_id.tour.id==2">
+                                <td width="33%" height="30px" style="background-color: black;"></td>
+                                <td width="33%" style="background-color: black;"></td>
+                                <td width="33%" style="background-color: green;"></td>
+                            </t>
+
+                            <!-- BLACK : complete BLACK row -->
+                            <t t-if="o.order_id.partner_invoice_id.tour.id==1">
+                                <td colspan="3" height="30px"  style="background-color: black;"></td>
+                            </t>
+                        </tr>
+
+                        <!-- EMPTY LINE FOR SPACE -->
+                        <tr>
+                            <td colspan="3" height="3px" />
+                        </tr>
+
+                        <!-- CUSTOMER NAME -->
+                        <tr>
+                            <td colspan="3" style="background-color: black; color: white; font-size: 1.9em; text-transform: uppercase;">
+                                <b><span t-field="o.order_id.partner_invoice_id" /></b>
+                            </td>
+                        </tr>
+
+                        <!-- EATER NAME -->
+                        <tr>
+                            <td colspan="3" style="font-size: 1.2em;">
+                                <span t-field="o.eater" />
+                            </td>
+                        </tr>
+
+                        <!-- PRODUCT NAME & SIZE -->
+                        <tr>
+                            <t t-if="o.product_id.attribute_value_ids">
+                                <td colspan="2" style="border: 1px black solid; font-size: 1.8em;">
+                                    <b><span t-field="o.product_id.name"/></b>
+                                </td>
+                                <td style="background-color: black; color: white; text-transform: uppercase; font-size: 1.8em;">
+                                    <b><span t-field="o.product_id.attribute_value_ids[0].name"/></b>
+                                </td>
+                            </t>
+                            
+                            <t t-if="not o.product_id.attribute_value_ids">
+                                <td colspan="3" style="border: 1px black solid; font-size: 1.8em;">
+                                    <b><span t-field="o.product_id.name"/></b>
+                                </td>
+                            </t>
+                        </tr>
+
+                        <!-- EMPTY LINE FOR SPACE -->
+                        <tr>
+                            <td colspan="3" height="3px" />
+                        </tr>
+
+                        <!-- PRODUCT DESCRIPTION -->
+                        <tr>
+                            <!-- ONLY IF EDITED -->
+                            <t t-if="o.description!=''">
+                                <td colspan="3" style="font-size: 1.1em;">
+                                    <i><span t-field="o.description"/></i>
+                                </td>
+                            </t>
+                        </tr>
+
+                        <!-- EMPTY LINE FOR SPACE -->
+                        <tr>
+                            <td colspan="3" height="3px" />
+                        </tr>
+
+                        <!-- + & - -->
+                        <t t-if="o.supplement_products_ids">
+                            <!-- Less than 4 show then one row for each -->
+                            <t t-if="len(o.supplement_products_ids or []) &lt; 4">
+                                <t t-foreach="o.supplement_products_ids" t-as="supp">
+                                    <tr>
+                                        <td style="border: 1px black solid;">
+                                            <t t-if="supp.lst_price &gt; 0">
+                                                +
+                                            </t>
+                                            <t t-if="supp.lst_price &lt; 0">
+                                                SANS
+                                            </t>
+                                        </td>
+                                        <td colspan="2" style="border: 1px black solid;">
+                                            <u><span t-field="supp.name"/></u>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                            <!-- More than 3, show then in a single cell with '|' between -->
+                            <t t-if="len(o.supplement_products_ids or []) &gt; 3">
+                                <tr>
+                                    <td colspan="3" style="font-size: 1.1em;">
+                                        <t t-foreach="o.supplement_products_ids" t-as="supp">
+                                            <t t-if="supp.lst_price &gt; 0">
+                                                + <u><span t-field="supp.name"/></u> | 
+                                            </t>
+                                        </t>
+                                        <br />
+                                        <t t-foreach="o.supplement_products_ids" t-as="supp">
+                                            <t t-if="supp.lst_price &lt; 0">
+                                                SANS <u><span t-field="supp.name"/></u> | 
+                                            </t>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                    </table>
+                </div>
+            </div>
+            <div class="oe_structure"/>
+		</template>
+
+		<template id="sale.report_deliverieslabel">
+		    <t t-call="report.html_container">
+		        <t t-foreach="doc_ids" t-as="doc_id">
+		            <t t-raw="translate_doc(doc_id, doc_model, 'order_id.partner_id.lang', 'sale.report_deliverieslabel_document')"/>
+		        </t>
+		    </t>
+		</template>
+	</data>
+</openerp>
