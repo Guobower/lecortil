@@ -57,4 +57,7 @@ class product_product_brand(models.Model):
                           'default_code': product.default_code,
                           }
                 result.append(_name_get(mydict))
+
+	result.sort()
         return result
+
