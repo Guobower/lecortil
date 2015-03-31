@@ -28,16 +28,16 @@
                         <tr>
                             <!-- BLUE : BLACK RIGHT AND BLACK LEFT -->
                             <t t-if="o.order_id.partner_invoice_id.tour.id==3">
-                                <td width="33%" height="30px" style="background-color: black;"></td>
-                                <td width="33%" style="background-color: blue;"></td>
-                                <td width="33%" style="background-color: black;"></td>
+                                <td width="37%" height="32px" style="background-color: black;"></td>
+				<td></td>
+				<td width="34%" style="background-color: black;"></td>
                             </t>
 
-                            <!-- BLACK : BLACK RIGHT AND CENTER -->
+                            <!-- GREEN : BLACK RIGHT AND CENTER -->
                             <t t-if="o.order_id.partner_invoice_id.tour.id==2">
-                                <td width="33%" height="30px" style="background-color: black;"></td>
-                                <td width="33%" style="background-color: black;"></td>
-                                <td width="33%" style="background-color: green;"></td>
+                                <td width="33%" height="32px" style="background-color: black;"></td>
+				<td width="34%" style="background-color: black;"></td>
+				<td></td>
                             </t>
 
                             <!-- BLACK : complete BLACK row -->
