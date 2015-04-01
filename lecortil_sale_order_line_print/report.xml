@@ -11,64 +11,49 @@
 		/>
 
 		<template id="sale.report_deliverieslabel_document">
-			<!-- Multicompany -->
-			<t t-if="o and 'company_id' in o">
-				<t t-set="company" t-value="o.company_id"/>
-			</t>
-			<t t-if="not o or not 'company_id' in o">
-				<t t-set="company" t-value="res_company"/>
-			</t>
-
-            <div class="page" t-foreach="int(round(o.product_uos_qty))" t-as="unit">
-                <div class="oe_structure"/>
-                <div class="row">
-                    <table style="width: 100%; text-align: center;">
+			 <div class="page" t-foreach="int(round(o.product_uos_qty))" t-as="unit">
+                    <table style="margin-left: -10px; margin-top: -10px; width: 110%; text-align: center;">
 
                         <!-- DELIVERY TOUR COLOR ROW -->
                         <tr>
                             <!-- BLUE : BLACK RIGHT AND BLACK LEFT -->
                             <t t-if="o.order_id.partner_invoice_id.tour.id==3">
-                                <td width="37%" height="32px" style="background-color: black;"></td>
-				<td></td>
-				<td width="34%" style="background-color: black;"></td>
+                                <td width="37%" height="32px" style="background-color: black;"/>
+				<td/>
+				<td width="34%" style="background-color: black;"/>
                             </t>
 
                             <!-- GREEN : BLACK RIGHT AND CENTER -->
                             <t t-if="o.order_id.partner_invoice_id.tour.id==2">
-                                <td width="33%" height="32px" style="background-color: black;"></td>
-				<td width="34%" style="background-color: black;"></td>
-				<td></td>
+                                <td width="33%" height="32px" style="background-color: black;"/>
+				<td width="34%" style="background-color: black;"/>
+				<td/>
                             </t>
 
                             <!-- BLACK : complete BLACK row -->
                             <t t-if="o.order_id.partner_invoice_id.tour.id==1">
-                                <td colspan="3" height="30px"  style="background-color: black;"></td>
+                                <td colspan="3" height="32px" style="background-color: black;"/>
                             </t>
-                        </tr>
-
-                        <!-- EMPTY LINE FOR SPACE -->
-                        <tr>
-                            <td colspan="3" height="3px" />
                         </tr>
 
                         <!-- CUSTOMER NAME -->
                         <tr>
                             <td colspan="3" style="background-color: black; color: white; font-size: 1.9em; text-transform: uppercase;">
-                                <b><span t-field="o.order_id.partner_invoice_id" /></b>
+                                <b><span t-field="o.order_id.partner_invoice_id"/></b>
                             </td>
                         </tr>
 
                         <!-- EATER NAME -->
                         <tr>
-                            <td colspan="3" style="font-size: 1.2em;">
-                                <span t-field="o.eater" />
+                            <td colspan="3" style="font-size: 1.1em;">
+                                <span t-field="o.eater"/>
                             </td>
                         </tr>
 
                         <!-- PRODUCT NAME & SIZE -->
                         <tr>
                             <t t-if="o.product_id.attribute_value_ids">
-                                <td colspan="2" style="border: 1px black solid; font-size: 1.8em;">
+                                <td colspan="2" style="border-top: none; font-size: 1.8em; margin: 0px; padding: 0px;">
                                     <b><span t-field="o.product_id.name"/></b>
                                 </td>
                                 <td style="background-color: black; color: white; text-transform: uppercase; font-size: 1.8em;">
@@ -83,11 +68,6 @@
                             </t>
                         </tr>
 
-                        <!-- EMPTY LINE FOR SPACE -->
-                        <tr>
-                            <td colspan="3" height="3px" />
-                        </tr>
-
                         <!-- PRODUCT DESCRIPTION -->
                         <tr>
                             <!-- ONLY IF EDITED -->
@@ -96,11 +76,6 @@
                                     <i><span t-field="o.description"/></i>
                                 </td>
                             </t>
-                        </tr>
-
-                        <!-- EMPTY LINE FOR SPACE -->
-                        <tr>
-                            <td colspan="3" height="3px" />
                         </tr>
 
                         <!-- + & - -->
@@ -132,7 +107,7 @@
                                                 + <u><span t-field="supp.name"/></u> | 
                                             </t>
                                         </t>
-                                        <br />
+                                        <br/>
                                         <t t-foreach="o.supplement_products_ids" t-as="supp">
                                             <t t-if="supp.lst_price &lt; 0">
                                                 SANS <u><span t-field="supp.name"/></u> | 
@@ -143,9 +118,7 @@
                             </t>
                         </t>
                     </table>
-                </div>
             </div>
-            <div class="oe_structure"/>
 		</template>
 
 		<template id="sale.report_deliverieslabel">
