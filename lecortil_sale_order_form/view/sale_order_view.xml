@@ -11,8 +11,8 @@
                 </xpath>
             </field>
         </record>
-        <record model="ir.ui.view" id="view_sale_order_cortil_product_supplements">
-            <field name="name">sale.order.cortil.product.supplements</field>
+        <record model="ir.ui.view" id="view_sale_order_cortil_product_new_fields">
+            <field name="name">sale.order.cortil.product.new_fields</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
