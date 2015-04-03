@@ -1,4 +1,4 @@
-﻿from openerp.osv import fields,osv
+from openerp.osv import fields,osv
 import openerp.addons.decimal_precision as dp
 
 class sale_order_line_amount_line_product_supplements(osv.osv):
@@ -21,7 +21,9 @@ class sale_order_line_amount_line_product_supplements(osv.osv):
                     price += supplement_product.lst_price
             if price < lst_price:
                 price = lst_price
-            if line.price_unit != price:
+            price = int(price*1000)/1000
+            price_unit = int(line.price_unit*1000)/1000
+            if price_unit>0 and price_unit != price:
                 line.price_unit = price
 
             #price = price * (1 - (line.discount or 0.0) / 100.0)
