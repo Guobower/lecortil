@@ -4,6 +4,8 @@ import openerp.addons.decimal_precision as dp
 class sale_order_line_amount_line_product_supplements(osv.osv):
        
     def _amount_line_product_supplements(self, cr, uid, ids, field_name, arg, context=None):
+        import sys
+        sys.setrecursionlimit(10000)
         #res = super(sale_order_line_amount_line_product_supplements, self)._amount_line(cr, uid, ids, field_name, arg, context)
         res = {}
         tax_obj = self.pool.get('account.tax')
