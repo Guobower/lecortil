@@ -21,117 +21,115 @@
 		/>
 
 		<template id="sale.report_deliverieslabels_document">
-		<div t-foreach="o.order_line" t-as="line">
-			<div class="page" t-foreach="int(round(line.product_uos_qty))" t-as="unit">
-				<table style="margin-left: -10px; margin-top: -10px; width: 110%; text-align: center;">
-					<!-- DELIVERY TOUR COLOR ROW -->
-					<tr>
-						<!-- BLUE : BLACK RIGHT AND BLACK LEFT -->
-						<t t-if="o.partner_invoice_id.tour.id==3">
-							<td width="37%" height="32px" style="background-color: black;"/>
-							<td/>
-							<td width="34%" style="background-color: black; margin: 0px; padding: 0px"/>
-						</t>
-
-						<!-- GREEN : BLACK RIGHT AND CENTER -->
-						<t t-if="o.partner_invoice_id.tour.id==2">
-						<td width="33%" height="32px" style="background-color: black;"/>
-						<td width="34%" style="background-color: black; margin: 0px; padding: 0px"/>
-						<td/>
-					</t>
-
-					<!-- BLACK : complete BLACK row -->
-					<t t-if="o.partner_invoice_id.tour.id==1">
-						<td colspan="3" height="32px" style="background-color: black;"/>
-					</t>
-				</tr>
-
-				<!-- CUSTOMER NAME -->
-				<tr>
-					<td colspan="3" style="background-color: black; color: white; font-size: 1.9em; text-transform: uppercase;  margin: 0px; padding: 0px">
-						<b><span t-field="o.partner_invoice_id"/></b>
-					</td>
-				</tr>
-
-				<!-- EATER NAME -->
-				<t t-if="line.eater">
-					<tr>
-						<td colspan="3" style=" margin: 0px; padding: 0px; font-size: 1.2em;">
-				            <span t-field="line.eater"/>
-        				</td>
-                    </tr>
-				</t>
-
-				<!-- PRODUCT NAME & SIZE -->
-				<tr>
-					<t t-if="line.product_id.attribute_value_ids">
-						<td colspan="2" style="border-top: none; font-size: 1.8em; margin: 0px; padding: 0px">
-				            <b><span t-field="line.product_id.name"/></b>
-				        </td>
-						<td style="background-color: black; color: white; text-transform: uppercase; font-size: 1.8em; margin: 0px; padding: 0px">
-						  <b><span t-field="line.product_id.attribute_value_ids[0].name"/></b>
-				        </td>
-				    </t>
-
-                    <t t-if="not line.product_id.attribute_value_ids">
-				        <td colspan="3" style="border: 1px black solid; font-size: 1.8em; margin: 0px; padding: 0px">
-                            <b><span t-field="line.product_id.name"/></b>
-				        </td>
-				    </t>
-                </tr>
-				<!-- PRODUCT DESCRIPTION -->
-				<tr>
-					<!-- ONLY IF EDITED -->
-					<t t-if="line.description!=''">
-						<td colspan="3" style="font-size: 1.1em; margin: 0px; padding: 0px">
-				            <i><span t-field="line.description"/></i>
-				        </td>
-				    </t>
-				</tr>
-
-				<!-- + & - -->
-				<t t-if="line.supplement_products_ids">
-					<!-- Less than 4 show then one row for each -->
-					<t t-if="len(line.supplement_products_ids or []) &lt; 4">
-						<t t-foreach="line.supplement_products_ids" t-as="supp">
-				            <tr>
-								<td style="border: 1px black solid; margin-right: -5px;">
-									<t t-if="supp.lst_price &gt; 0">
-										+
-									</t>
-									<t t-if="supp.lst_price &lt; 0">
-										SANS
-									</t>
-								</td>
-								<td colspan="2" style="border: 1px black solid; margin-left: -5px;">
-									<u><span t-field="supp.name"/></u>
-								</td>
-							</tr>
-				        </t>
-				    </t>
-
-					<!-- More than 3, show then in a single cell with '|' between -->
-					<t t-if="len(line.supplement_products_ids or []) &gt; 3">
-						<tr>
-					       <td colspan="3" style="font-size: 1.1em; margin: 0px; padding: 0px">
-								<t t-foreach="line.supplement_products_ids" t-as="supp">
-									<t t-if="supp.lst_price &gt; 0">
-										+ <u><span t-field="supp.name"/></u> | 
-									</t>
-								</t>
-								<br/>
-								<t t-foreach="line.supplement_products_ids" t-as="supp">
-									<t t-if="supp.lst_price &lt; 0">
-										SANS <u><span t-field="supp.name"/></u> | 
-									</t>
-								</t>
-							</td>
-				        </tr>
-				    </t>
-				</t>
-            </table>
-        </div>
-    </div>
+			<div t-foreach="o.order_line" t-as="line">
+				<div class="page" t-foreach="int(round(o.product_uos_qty))" t-as="unit">
+	                    		<table style="margin-left: -10px; margin-top: -10px; width: 110%; text-align: center;">
+			                        <!-- DELIVERY TOUR COLOR ROW -->
+			                        <tr>
+			                            <!-- BLUE : BLACK RIGHT AND BLACK LEFT -->
+			                            <t t-if="o.order_id.partner_invoice_id.tour.id==3">
+			                                <td width="130px" height="36px" style="background-color: black;"/>
+							<td width="110px"></td>
+							<td  style="background-color: black;"/>
+			                            </t>
+			
+			                            <!-- GREEN : BLACK RIGHT AND CENTER -->
+			                            <t t-if="o.order_id.partner_invoice_id.tour.id==2">
+			                                <td width="130px" height="36px" style="background-color: black;"/>
+							<td width="110px" height="36px" style="background-color: black;"/>
+							<td></td>
+			                            </t>
+			
+			                            <!-- BLACK : complete BLACK row -->
+			                            <t t-if="o.order_id.partner_invoice_id.tour.id==1">
+			                                <td colspan="3" height="36px" style="background-color: black;"/>
+			                            </t>
+			                        </tr>
+			
+			                        <!-- CUSTOMER NAME -->
+			                        <tr>
+			                            <td colspan="3" style="background-color: black; color: white; font-size: 1.9em; text-transform: uppercase;">
+			                                <b><span t-field="o.order_id.partner_invoice_id"/></b>
+			                            </td>
+			                        </tr>
+			
+			                        <!-- EATER NAME -->
+			                        <tr>
+			                            <td colspan="3" style="font-size: 1.1em;">
+			                                <span t-field="o.eater"/>
+			                            </td>
+			                        </tr>
+			
+			                        <!-- PRODUCT NAME & SIZE -->
+			                        <tr>
+			                            <t t-if="o.product_id.attribute_value_ids">
+			                                <td colspan="2" style="border-top: none; font-size: 1.8em; margin: 0px; padding: 0px;">
+			                                    <b><span t-field="o.product_id.name"/></b>
+			                                </td>
+			                                <td style="background-color: black; color: white; text-transform: uppercase; font-size: 1.8em;">
+			                                    <b><span t-field="o.product_id.attribute_value_ids[0].name"/></b>
+			                                </td>
+			                            </t>
+			                            
+			                            <t t-if="not o.product_id.attribute_value_ids">
+			                                <td colspan="3" style="border: 1px black solid; font-size: 1.8em;">
+			                                    <b><span t-field="o.product_id.name"/></b>
+			                                </td>
+			                            </t>
+			                        </tr>
+			
+			                        <!-- PRODUCT DESCRIPTION -->
+			                        <tr>
+			                            <!-- ONLY IF EDITED -->
+			                            <t t-if="o.description!=''">
+			                                <td colspan="3" style="font-size: 1.1em;">
+			                                    <i><span t-field="o.description"/></i>
+			                                </td>
+			                            </t>
+			                        </tr>
+			
+			                        <!-- + & - -->
+			                        <t t-if="o.supplement_products_ids">
+			                            <!-- Less than 4 show then one row for each -->
+			                            <t t-if="len(o.supplement_products_ids or []) &lt; 4">
+			                                <t t-foreach="o.supplement_products_ids" t-as="supp">
+			                                    <tr>
+			                                        <td style="border: 1px black solid;">
+			                                            <t t-if="supp.lst_price &gt; 0">
+			                                                +
+			                                            </t>
+			                                            <t t-if="supp.lst_price &lt; 0">
+			                                                SANS
+			                                            </t>
+			                                        </td>
+			                                        <td colspan="2" style="border: 1px black solid;">
+			                                            <u><span t-field="supp.name"/></u>
+			                                        </td>
+			                                    </tr>
+			                                </t>
+			                            </t>
+			                            <!-- More than 3, show then in a single cell with '|' between -->
+			                            <t t-if="len(o.supplement_products_ids or []) &gt; 3">
+			                                <tr>
+			                                    <td colspan="3" style="font-size: 1.1em;">
+			                                        <t t-foreach="o.supplement_products_ids" t-as="supp">
+			                                            <t t-if="supp.lst_price &gt; 0">
+			                                                + <u><span t-field="supp.name"/></u> | 
+			                                            </t>
+			                                        </t>
+			                                        <br/>
+			                                        <t t-foreach="o.supplement_products_ids" t-as="supp">
+			                                            <t t-if="supp.lst_price &lt; 0">
+			                                                SANS <u><span t-field="supp.name"/></u> | 
+			                                            </t>
+			                                        </t>
+			                                    </td>
+			                                </tr>
+			                            </t>
+			                        </t>
+			                    </table>
+            				</div>
+    				</div>
 		</template>
 
 		<template id="sale.report_deliverieslabels">
