@@ -34,7 +34,7 @@ class sale_order_line_amount_line_product_supplements(osv.osv):
                     line.price_unit = price
             
             elif price!= line.price_unit:
-                    line.price_unit = price
+                line.price_unit = price
 
             taxes = tax_obj.compute_all(cr, uid, line.tax_id, price, line.product_uom_qty, line.product_id, line.order_id.partner_id)
             cur = line.order_id.pricelist_id.currency_id
