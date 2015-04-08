@@ -28,12 +28,9 @@ class sale_order_line_amount_line_product_supplements(osv.osv):
                 if price <= line.product_price_unit:
                     price = line.product_price_unit
                 
-                price_test = int(price*1000)/1000.0
-                price_unit_test = int(line.price_unit*1000)/1000.0
-                if price_test > 0 and price_unit_test != price_test:
-                    line.price_unit = price
-            
-            elif price!= line.price_unit:
+            price_test = int(price*1000)/1000.0
+            price_unit_test = int(line.price_unit*1000)/1000.0
+            if price_test > 0 and price_unit_test != price_test:
                 line.price_unit = price
 
             taxes = tax_obj.compute_all(cr, uid, line.tax_id, price, line.product_uom_qty, line.product_id, line.order_id.partner_id)
