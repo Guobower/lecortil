@@ -84,8 +84,8 @@
 		                <!-- + & - -->
 		                <t t-if="o.supplement_products_ids">
 		
-		                    <!-- Less than 4 show then one row for each -->
-		                    <t t-if="len(o.supplement_products_ids or []) &lt; 4">
+		                    <!-- Less than 3 show then one row for each -->
+		                    <t t-if="len(o.supplement_products_ids or []) &lt; 3">
 		                        <t t-foreach="o.supplement_products_ids" t-as="supp">
 		                            <tr>
 		                                <td style="border: 1px black solid;">
@@ -103,10 +103,10 @@
 		                        </t>
 		                    </t>
 		
-		                    <!-- More than 3, show then in a single cell with '|' between -->
-		                    <t t-if="len(o.supplement_products_ids or []) &gt; 3">
+		                    <!-- More than 2, show then in a single cell with '|' between -->
+		                    <t t-if="len(o.supplement_products_ids or []) &gt; 2">
 		                        <tr>
-		                            <td colspan="3" style="border: 1px solid black; font-size: 1.1em;">
+		                            <td colspan="3" style="border: 1px solid black; font-size: 1.1em; font-weight: bold;">
 		                                <t t-foreach="o.supplement_products_ids" t-as="supp">
 		                                    <t t-if="supp.lst_price &gt; 0">
 		                                        + <u><span t-field="supp.name"/></u> | 
