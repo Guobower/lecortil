@@ -6,7 +6,7 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//tree[@string='Sales Order Lines']/field[@name='description']" position="before">
+                <xpath expr="//tree[@string='Sales Order Lines']/field[@name='name']" position="before">
                     <field name="supplement_products_ids" widget="many2many_tags" options="{'no_create': True}" domain="[('category_name','ilike','%suppl%')]"/>
                 </xpath>
             </field>
