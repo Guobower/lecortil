@@ -76,7 +76,7 @@
 		                    <!-- ONLY IF EDITED -->
 		                    <t t-if="o.description!=''">
 		                        <td colspan="3" style="font-size: 1.2em;">
-		                            <i><b></b><span t-field="o.description"/></b></i>
+		                            <i><b><span t-field="o.description"/></b></i>
 		                        </td>
 		                    </t>
 		                </tr>
