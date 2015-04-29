@@ -87,7 +87,7 @@
                                 <!-- ONLY IF EDITED -->
                                 <t t-if="line.description!=''">
                                     <td colspan="3" style="font-size: 1.2em;">
-                                        <i><b></b></bu><span t-field="line.description"/></b></i>
+                                        <i><b><u><span t-field="line.description"/></u></b></i>
                                     </td>
                                 </t>
                             </tr>
