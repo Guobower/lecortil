@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+        <record model="ir.ui.view" id="view_sale_order_cortil_set_free">
+            <field name="name">sale.order.cortil</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="lecortil_sale_order_line_print.view_sale_order_cortil"/>
+            <field name="arch" type="xml">
+                <button name="print_sale_order_line" position="before">
+                    <field name="free"/>
+                </button>
+            </field>
+        </record>
+    </data>
+</openerp>
