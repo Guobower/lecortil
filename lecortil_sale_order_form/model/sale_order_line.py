@@ -18,9 +18,9 @@ class sale_order_products_summary(models.Model):
             for sale_order_line in sale_order_line_obj.browse(cr, uid,sale_order_lines):
                 category_name = sale_order_line.product_id.categ_id.name
                 if category_dic.has_key(category_name):
-                    category_dic[category_name] += 1
+                    category_dic[category_name] += sale_order_line.product_uom_qty
                 else:
-                    category_dic[category_name] = 1
+                    category_dic[category_name] = sale_order_line.product_uom_qty
             for cat_name in category_dic.keys():
                 summary += '%s: %s\n'%(cat_name, str(category_dic.get(cat_name, 0)))
             if self.products_summary != summary:
