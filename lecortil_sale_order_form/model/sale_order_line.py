@@ -27,4 +27,19 @@ class sale_order_products_summary(models.Model):
                 self.products_summary = summary
         else:
             if self.products_summary != "":
-                self.products_summary = ""          
+                self.products_summary = ""
+
+class sale_order_line_with_total(models.Model):
+    _inherit = 'sale.order.line'
+
+    line_total_price = fields.Float(compute='_compute_price_tax',string="Total TVAC", store=True)
+
+    @api.one
+    @api.depends('price_unit', 'product_uom_qty', 'free', 'product_id')
+    def _compute_price_tax(self):
+
+     if self.free:
+         self.line_total_price = 0
+     else:
+         self.line_total_price = self.price_unit * self.product_uom_qty
+
