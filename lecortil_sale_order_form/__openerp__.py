@@ -15,6 +15,7 @@ It leaves for columns:
 	- Subtotal
 And adds:
 	- The sum of products by category
+	- Total TVA INC for each line
 
 It also removes all unecessary fields in the form head.
 
