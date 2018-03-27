@@ -1,10 +1,22 @@
 from openerp.osv import fields,osv
 import openerp.addons.decimal_precision as dp
 
+import logging
+_logger = logging.getLogger(__name__)
+
 class sale_order_line_amount_line_product_supplements(osv.osv):
-       
-    def product_id_change(self, cr, uid, ids, pricelist, product, qty=0, uom=False, qty_uos=0, uos=False, name='', partner_id=False,lang=False, update_tax=True, date_order=False, packaging=False, fiscal_position=False, flag=False, context=None):
+
+    def create(self, cr, uid, values, context=None):
+        if values.has_key('price_unit'):
+            values['product_price_unit'] = values['price_unit']
+        return super(sale_order_line_amount_line_product_supplements, self).create(cr, uid, values, context=context)
+
+    def product_id_change(self, cr, uid, ids, pricelist, product, qty=0,
+            uom=False, qty_uos=0, uos=False, name='', partner_id=False,
+            lang=False, update_tax=True, date_order=False, packaging=False, fiscal_position=False, flag=False, context=None):
+
         res = super(sale_order_line_amount_line_product_supplements, self).product_id_change(cr, uid, ids, pricelist, product, qty, uom, qty_uos, uos, name, partner_id, lang, update_tax, date_order, packaging, fiscal_position, flag, context)
+
         if res.has_key('value') and res['value'].has_key('price_unit'):
             res['value']['product_price_unit']=res['value']['price_unit']
         return res
@@ -38,7 +50,6 @@ class sale_order_line_amount_line_product_supplements(osv.osv):
                 price_unit_test = int(line.price_unit*1000)/1000.0
                 if price_test > 0 and price_unit_test != price_test:
                     line.price_unit = price
-
             taxes = tax_obj.compute_all(cr, uid, line.tax_id, price, line.product_uom_qty, line.product_id, line.order_id.partner_id)
             cur = line.order_id.pricelist_id.currency_id
             res[line.id] = cur_obj.round(cr, uid, cur, taxes['total'])

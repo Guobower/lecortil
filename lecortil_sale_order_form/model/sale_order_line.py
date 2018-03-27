@@ -38,8 +38,7 @@ class sale_order_line_with_total(models.Model):
     @api.depends('price_unit', 'product_uom_qty', 'free', 'product_id')
     def _compute_price_tax(self):
 
-     if self.free:
-         self.line_total_price = 0
-     else:
-         self.line_total_price = self.price_unit * self.product_uom_qty
-
+        if self.free:
+            self.line_total_price = 0
+        else:
+            self.line_total_price = self.price_unit * self.product_uom_qty
